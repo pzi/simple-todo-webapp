@@ -1,1 +1,1 @@
-export var someContent = "Hello React.js! :)"
+export default "Hello React.js! :)"
