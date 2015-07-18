@@ -26,9 +26,25 @@ module.exports = {
     reasons: true
   },
 
+  resolve: {
+    extensions: ["", ".js", ".jsx", '.css', '.sass']
+  },
+
   module: {
-    loaders: [
-        { test: /\.css$/, loader: "style!css" }
+    loaders: [{
+        test: /\.css$/,
+        loader: "style!css"
+      }, {
+        test: /\.sass$/,
+        loader: "style!css!sass?indentedSyntax"
+      }, {
+        test: require.resolve("react"),
+        loader: "imports?shim=es5-shim/es5-shim&sham=es5-shim/es5-sham"
+      }, {
+        test: /\.(js|jsx)$/,
+        exclude: /(node_modules)/,
+        loader: "babel"
+      }
     ]
   }
 };
