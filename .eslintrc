@@ -1,30 +1,22 @@
 {
-    "rules": {
-        "indent": [
-            0,
-            2
-        ],
-        "quotes": [
-            2,
-            "double"
-        ],
-        "linebreak-style": [
-            2,
-            "unix"
-        ],
-        "semi": [
-            2,
-            "always"
-        ]
-    },
-    "env": {
-        "es6": true,
-        "browser": true
-    },
-    "ecmaFeatures": {
-        "jsx": true
-    },
-    "plugins": [
-        "react"
-    ]
+  "rules": {
+    "indent": [0, 2],
+    "quotes": [2, "double"],
+    "linebreak-style": [2, "unix"],
+    "semi": [2, "always"],
+    "no-undef": false
+  },
+  "ext": [".js", ".jsx"],
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "ecmaFeatures": {
+    "ecmascript": 6,
+    "jsx": true,
+    "modules": true
+  },
+  "plugins": [
+    "react"
+  ]
 }
