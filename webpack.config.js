@@ -8,7 +8,7 @@
 "use strict";
 
 module.exports = {
-  entry: "./src/components/App.js",
+  entry: "./src/components/App.jsx",
 
   output: {
       path: "./build",
