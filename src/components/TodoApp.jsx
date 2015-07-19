@@ -36,8 +36,3 @@ export default class TodoApp extends React.Component {
     )
   }
 }
-
-React.render(
-  <TodoApp title="I am a property!" />,
-  document.getElementById("todo-app")
-)
