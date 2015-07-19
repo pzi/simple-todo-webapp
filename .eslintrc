@@ -1,20 +1,26 @@
 {
-  "rules": {
-    "indent": [0, 2],
-    "quotes": [2, "double"],
-    "linebreak-style": [2, "unix"],
-    "semi": [2, "always"],
-    "no-undef": false
+  "parser": "babel-eslint",
+  "ecmaFeatures": {
+    "ecmascript": 6,
+    "blockBindings": true,
+    "jsx": true,
+    "modules": true,
+    "classes": true
   },
   "ext": [".js", ".jsx"],
   "env": {
     "es6": true,
-    "browser": true
+    "browser": true,
+    "node": true
   },
-  "ecmaFeatures": {
-    "ecmascript": 6,
-    "jsx": true,
-    "modules": true
+  "rules": {
+    "eol-last": 2,
+    "camelcase": 2,
+    "linebreak-style": [2, "unix"],
+    "semi": [2, "always"],
+    "indent": [1, 2],
+    "quotes": [2, "double"],
+    "react/jsx-boolean-value": 2
   },
   "plugins": [
     "react"

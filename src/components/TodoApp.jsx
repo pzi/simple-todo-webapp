@@ -9,20 +9,19 @@ export default class TodoApp extends React.Component {
 
   constructor(props) {
     super(props);
-    this.onClickHandler = this.onClickHandler.bind(this);
     this.state = {
       date: this.theTime(),
-      msg: "State says the time is:",
-      title: props.title
+      msg: "State says the time is:"
     };
+    this.onClickHandler = this.onClickHandler.bind(this);
   }
 
   theTime() {
-    return (new Date).toLocaleTimeString()
+    return (new Date()).toLocaleTimeString();
   }
 
-  onClickHandler(e) {
-    this.setState({date: this.theTime()})
+  onClickHandler() {
+    this.setState({date: this.theTime()});
   }
 
   render() {
@@ -32,9 +31,9 @@ export default class TodoApp extends React.Component {
         <br />
         {this.state.msg} {this.state.date}
         <br />
-        {this.state.title}
+        {this.props.title}
         <ES6Component title="Test" initialCount={ 123 } />
       </div>
-    )
+    );
   }
 }
