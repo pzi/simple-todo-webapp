@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 // This component is the latest-and-greatest syntax. Much of it is non-standard,
 // because the standards haven't been defined yet.
@@ -10,7 +10,7 @@ export default class ES6Component extends React.Component {
   }
 
   static defaultProps = {
-    title: "Default title"
+    title: 'Default title'
   }
 
   // State is not static!
@@ -20,8 +20,8 @@ export default class ES6Component extends React.Component {
 
   render() {
     return (
-      <div style={{ padding: "10px", border: "1px solid black" }}>
-        <div style={{ fontWeight: "bold" }}>ES6Component ({ this.props.title })</div>
+      <div style={{ padding: '10px', border: '1px solid black' }}>
+        <div style={{ fontWeight: 'bold' }}>ES6Component ({ this.props.title })</div>
         <div>Click Count: { this.state.count }</div>
         <button onClick={ this.handleClick }>Click</button>
       </div>

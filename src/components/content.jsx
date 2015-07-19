@@ -1,1 +1,1 @@
-export default "Hello React.js! :)"
+export default 'Hello React.js! :)';

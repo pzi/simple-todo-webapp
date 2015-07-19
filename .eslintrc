@@ -19,7 +19,7 @@
     "linebreak-style": [2, "unix"],
     "semi": [2, "always"],
     "indent": [1, 2],
-    "quotes": [2, "double"],
+    "quotes": [2, "single"],
     "react/jsx-boolean-value": 2
   },
   "plugins": [

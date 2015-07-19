@@ -4,10 +4,10 @@ import React from 'react';
 class ES6StandardComponent extends React.Component {
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       count: props.initialCount || 0
-    }
+    };
   }
 
   render() {
@@ -17,27 +17,27 @@ class ES6StandardComponent extends React.Component {
         <div>Click Count: { this.state.count }</div>
         <button onClick={ this.handleClick.bind(this) }>Click</button>
       </div>
-    )
+    );
   }
 
   // No arrow function here, notice the `.bind(this)` in the render method.
   handleClick(event) {
-    event.preventDefault()
+    event.preventDefault();
     this.setState({
       count: this.state.count + 1
-    })
+    });
   }
 }
 
 ES6StandardComponent.propTypes = {
   title: React.PropTypes.string,
   initialCount: React.PropTypes.number
-}
+};
 
 ES6StandardComponent.defaultProps = {
   title: 'Default title'
-}
+};
 
 // Notice we export at the bottom, because we need to export after setting all
 // the class properties.
-export default ES6StandardComponent
+export default ES6StandardComponent;

@@ -18,13 +18,13 @@ export default React.createClass({
   getDefaultProps: function() {
     return {
       title: 'Default title'
-    }
+    };
   },
 
   getInitialState: function() {
     return {
       count: this.props.initialCount || 0
-    }
+    };
   },
 
   render: function() {
@@ -34,14 +34,14 @@ export default React.createClass({
         <div>Click Count: { this.state.count }</div>
         <button onClick={ this.handleClick }>Click</button>
       </div>
-    )
+    );
   },
 
   // Notice, no .bind(this) required when using the createClass builder.
   handleClick: function(event) {
-    event.preventDefault()
+    event.preventDefault();
     this.setState({
       count: this.state.count + 1
-    })
+    });
   }
 });
