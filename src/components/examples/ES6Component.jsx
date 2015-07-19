@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default class ES6Component extends React.Component {
 
@@ -8,7 +8,7 @@ export default class ES6Component extends React.Component {
   }
 
   static defaultProps = {
-    title: 'Default title'
+    title: "Default title"
   }
 
   state = {
@@ -17,18 +17,18 @@ export default class ES6Component extends React.Component {
 
   render() {
     return (
-      <div style={{ padding: '10px', border: '1px solid black' }}>
-        <div style={{ fontWeight: 'bold' }}>ES6Component ({ this.props.title })</div>
+      <div style={{ padding: "10px", border: "1px solid black" }}>
+        <div style={{ fontWeight: "bold" }}>ES6Component ({ this.props.title })</div>
         <div>Click Count: { this.state.count }</div>
         <button onClick={ this.handleClick }>Click</button>
       </div>
-    )
+    );
   }
 
   handleClick = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     this.setState({
       count: this.state.count + 1
-    })
+    });
   }
 }

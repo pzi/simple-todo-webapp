@@ -1,9 +1,9 @@
 import "normalize.css";
 import "../styles/style";
 
-import React from "react"
-import content from "./content"
-import ES6Component from 'components/examples/ES6Component'
+import React from "react";
+import content from "./content";
+import ES6Component from "components/examples/ES6Component";
 
 export default class TodoApp extends React.Component {
 
