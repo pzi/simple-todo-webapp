@@ -48,8 +48,8 @@ module.exports = {
           sham: "es5-shim/es5-sham"
         }
       }, {
-        test: /\.(js|jsx)$/,
-        exclude: /(node_modules)/,
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
         loader: "babel"
       }
     ]
