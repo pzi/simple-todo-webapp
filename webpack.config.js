@@ -8,12 +8,14 @@
 "use strict";
 
 module.exports = {
-  entry: "./src/components/App.jsx",
+  entry: {
+    Application: "Application"
+  },
 
   output: {
-      path: "./build",
-      filename: "application.js",
-      publicPath: "/assets/"
+    path: "./build",
+    filename: "application.js",
+    publicPath: "/assets/"
   },
 
   devServer: {
@@ -30,7 +32,8 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ["", ".js", ".jsx", '.css', '.sass']
+    extensions: ["", ".js", ".jsx", '.css', '.sass'],
+    modulesDirectories: ['src', 'node_modules']
   },
 
   module: {

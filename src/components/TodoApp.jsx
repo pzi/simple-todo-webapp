@@ -1,11 +1,10 @@
 import "normalize.css";
 import "../styles/style";
 
-import * as someContent from "./content.jsx";
+import React from "react"
+import content from "./content"
 
-import React from "react";
-
-class TodoApp extends React.Component {
+export default class TodoApp extends React.Component {
 
   constructor(props) {
     super(props);
@@ -27,7 +26,7 @@ class TodoApp extends React.Component {
   render() {
     return (
       <div onClick={this.onClickHandler}>
-        {someContent.default}
+        { content }
         <br />
         {this.state.msg} {this.state.date}
         <br />
@@ -36,8 +35,3 @@ class TodoApp extends React.Component {
     );
   }
 }
-
-React.render(
-  <TodoApp title="I am a property!" />,
-  document.getElementById("todo-app")
-);
