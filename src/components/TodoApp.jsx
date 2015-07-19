@@ -1,11 +1,10 @@
 import "normalize.css";
 import "../styles/style";
 
-import * as someContent from "./content.jsx";
-
 import React from "react"
+import content from "./content"
 
-class TodoApp extends React.Component {
+export default class TodoApp extends React.Component {
 
   constructor(props) {
     super(props);
@@ -28,7 +27,7 @@ class TodoApp extends React.Component {
   render() {
     return (
       <div onClick={this.onClickHandler}>
-        {someContent.default}
+        { content }
         <br />
         {this.state.msg} {this.state.date}
         <br />
