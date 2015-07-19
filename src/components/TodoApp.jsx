@@ -4,6 +4,8 @@ import "../styles/style";
 import React from "react"
 import content from "./content"
 import ES6Component from 'components/examples/ES6Component'
+import ES6StandardComponent from 'components/examples/ES6StandardComponent'
+import ES5Component from 'components/examples/ES5Component'
 
 export default class TodoApp extends React.Component {
 
@@ -33,6 +35,8 @@ export default class TodoApp extends React.Component {
         <br />
         {this.props.title}
         <ES6Component title="Test" initialCount={ 123 } />
+        <ES6StandardComponent />
+        <ES5Component />
       </div>
     );
   }

@@ -1,5 +1,7 @@
 import React from 'react';
 
+// This component is the latest-and-greatest syntax. Much of it is non-standard,
+// because the standards haven't been defined yet.
 export default class ES6Component extends React.Component {
 
   static propTypes = {
@@ -11,6 +13,7 @@ export default class ES6Component extends React.Component {
     title: 'Default title'
   }
 
+  // State is not static!
   state = {
     count: this.props.initialCount || 0
   }
@@ -25,6 +28,7 @@ export default class ES6Component extends React.Component {
     )
   }
 
+  // Magical arrow function will retian the content of `this`
   handleClick = (event) => {
     event.preventDefault()
     this.setState({
