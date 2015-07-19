@@ -7,23 +7,34 @@
  */
 "use strict";
 
+var path = require('path');
+var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CompressionPlugin = require('compression-webpack-plugin');
+
+var isProduction = process.env.NODE_ENV == 'production';
+
 module.exports = {
-  entry: {
-    Application: "Application"
-  },
+  entry: [
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server',
+    'Application'
+  ],
 
   output: {
-    path: "./build",
-    filename: "application.js",
-    publicPath: "/assets/"
+    path: path.join(__dirname, 'build'),
+    filename: 'application.js',
+    publicPath: '/assets/'
   },
 
   devServer: {
-    contentBase: "./src"
+    contentBase: path.join(__dirname, 'src'),
+    hot: true,
+    historyApiFallback: true
   },
 
   debug: true,
-  devtool: "sourcemap",
+  devtool: 'sourcemap',
 
   stats: {
     progress: true,
@@ -32,22 +43,42 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ["", ".js", ".jsx", '.css', '.sass'],
+    extensions: ['', '.js', '.jsx', '.coffee', '.cjsx', '.css', '.sass', '.png', '.svg', '.gif', '.jpg', '.jpeg'],
     modulesDirectories: ['src', 'node_modules']
   },
 
   module: {
-    loaders: [{
+    loaders: [
+      {
         test: /\.css$/,
-        loader: "style!css"
+        loader: 'style!css!autoprefixer'
       }, {
         test: /\.sass$/,
-        loader: "style!css!sass?indentedSyntax"
+        loader: 'style!css!autoprefixer!sass?indentedSyntax'
       }, {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules)/,
-        loader: "babel?optional[]=runtime&stage=0"
+        loader: 'react-hot!babel?optional[]=runtime&stage=0'
+      }, {
+        test: /\.(cjsx)$/,
+        exclude: /(node_modules)/,
+        loaders: 'coffee!cjsx'
+      }, {
+        test: /\.(coffee)$/,
+        exclude: /(node_modules)/,
+        loaders: 'coffee'
+      }, {
+        test: /\.(png|svg|gif|jpg|jpeg)$/,
+        exclude: /(node_modules)/,
+        loaders: 'url?limit=1000'
       }
     ]
-  }
+  },
+
+  plugins: isProduction ? [
+    new webpack.optimize.UglifyJsPlugin(),
+    new CompressionPlugin()
+  ] : [
+    new webpack.HotModuleReplacementPlugin()
+  ]
 };
