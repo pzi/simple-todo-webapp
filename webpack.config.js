@@ -44,16 +44,9 @@ module.exports = {
         test: /\.sass$/,
         loader: "style!css!sass?indentedSyntax"
       }, {
-        test: require.resolve("react"),
-        loader: "imports",
-        query: {
-          shim: "es5-shim/es5-shim",
-          sham: "es5-shim/es5-sham"
-        }
-      }, {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: "babel"
+        test: /\.(js|jsx)$/,
+        exclude: /(node_modules)/,
+        loader: "babel?optional[]=runtime&stage=0"
       }
     ]
   }

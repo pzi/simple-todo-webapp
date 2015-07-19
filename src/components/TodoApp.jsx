@@ -1,8 +1,9 @@
 import "normalize.css";
 import "../styles/style";
 
-import React from "react"
-import content from "./content"
+import React from "react";
+import content from "./content";
+import ES6Component from "components/examples/ES6Component";
 
 export default class TodoApp extends React.Component {
 
@@ -31,6 +32,7 @@ export default class TodoApp extends React.Component {
         {this.state.msg} {this.state.date}
         <br />
         {this.props.title}
+        <ES6Component title="Test" initialCount={ 123 } />
       </div>
     );
   }

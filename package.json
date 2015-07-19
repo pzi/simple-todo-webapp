@@ -25,6 +25,7 @@
     "webpack-dev-server": "^1.10.1"
   },
   "dependencies": {
+    "babel-runtime": "^5.7.0",
     "es5-shim": "^4.1.7",
     "normalize.css": "^3.0.3",
     "react": "^0.13.3"
