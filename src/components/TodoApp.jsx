@@ -11,30 +11,32 @@ export default class TodoApp extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      date: this.theTime(),
-      msg: 'State says the time is:'
-    };
-    this.onClickHandler = this.onClickHandler.bind(this);
+    this.state = { tick: 0 };
   }
 
-  theTime() {
-    return (new Date()).toLocaleTimeString();
+  componentDidMount() {
+    this._interval = setInterval(this.tick.bind(this), 1000);
   }
 
-  onClickHandler() {
-    this.setState({date: this.theTime()});
+  componentWillUnmount() {
+    clearInterval(this._interval);
+  }
+
+  tick() {
+    this.setState({ tick: this.state.tick + 1 });
   }
 
   render() {
+    const date = (new Date()).toLocaleTimeString();
+
     return (
-      <div onClick={this.onClickHandler}>
+      <div>
+        <h1>{ this.props.title }</h1>
         { content }
-        <br />
-        {this.state.msg} {this.state.date}
-        <br />
-        {this.props.title}
-        <ES6Component title='Test' initialCount={ 123 } />
+        <div>
+          The time is: { date }
+        </div>
+        <ES6Component title="Test" initialCount={ 123 } />
         <ES6StandardComponent />
         <ES5Component />
       </div>
