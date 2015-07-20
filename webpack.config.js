@@ -5,25 +5,32 @@
  * recompile as required if the subfolder /webpack-dev-server/ is visited. Visiting the root will
  * not automatically reload.
  */
-"use strict";
+'use strict';
+
+var webpack = require('webpack');
 
 module.exports = {
   entry: {
-    Application: "Application"
+    Application: [
+      'webpack-dev-server/client?http://localhost:8080', // to avoid adding it to html source
+      'webpack/hot/only-dev-server', // only-dev-server doesn't auto-reload browser if HMR fails
+      'Application'
+    ]
   },
 
   output: {
-    path: "./build",
-    filename: "application.js",
-    publicPath: "/assets/"
+    path: './build',
+    filename: 'application.js',
+    publicPath: '/assets/'
   },
 
   devServer: {
-    contentBase: "./src"
+    contentBase: './src',
+    hot: true
   },
 
   debug: true,
-  devtool: "sourcemap",
+  devtool: 'sourcemap',
 
   stats: {
     progress: true,
@@ -32,22 +39,26 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ["", ".js", ".jsx", '.css', '.sass'],
+    extensions: ['', '.js', '.jsx', '.css', '.sass'],
     modulesDirectories: ['src', 'node_modules']
   },
 
   module: {
     loaders: [{
         test: /\.css$/,
-        loader: "style!css"
+        loader: 'style!css'
       }, {
         test: /\.sass$/,
-        loader: "style!css!sass?indentedSyntax"
+        loader: 'style!css!sass?indentedSyntax'
       }, {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules)/,
-        loader: "babel?optional[]=runtime&stage=0"
+        loader: 'babel?optional[]=runtime&stage=0'
       }
     ]
-  }
+  },
+
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
 };
