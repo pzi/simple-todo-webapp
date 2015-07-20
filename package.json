@@ -5,7 +5,7 @@
   "main": "src/components/App.js",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server"
   },
   "author": "Patrik Affentranger",
   "license": "MIT",
@@ -19,6 +19,7 @@
     "eslint-plugin-react": "^2.7.1",
     "imports-loader": "^0.6.4",
     "node-sass": "^3.2.0",
+    "react-hot-loader": "^1.2.8",
     "sass-loader": "^1.0.2",
     "style-loader": "^0.12.3",
     "webpack": "^1.10.1",

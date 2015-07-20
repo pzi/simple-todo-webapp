@@ -14,7 +14,7 @@ module.exports = {
     Application: [
       'webpack-dev-server/client?http://localhost:8080', // to avoid adding it to html source
       'webpack/hot/only-dev-server', // only-dev-server doesn't auto-reload browser if HMR fails
-      'Application'
+      'Application' // my app entry point
     ]
   },
 
@@ -51,9 +51,9 @@ module.exports = {
         test: /\.sass$/,
         loader: 'style!css!sass?indentedSyntax'
       }, {
-        test: /\.(js|jsx)$/,
+        test: /\.jsx?$/,
         exclude: /(node_modules)/,
-        loader: 'babel?optional[]=runtime&stage=0'
+        loader: 'react-hot!babel?optional[]=runtime&stage=0'
       }
     ]
   },
