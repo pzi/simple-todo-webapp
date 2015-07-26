@@ -5,14 +5,13 @@
  * recompile as required if the subfolder /webpack-dev-server/ is visited. Visiting the root will
  * not automatically reload.
  */
-"use strict";
+'use strict';
 
 var path = require('path');
 var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CompressionPlugin = require('compression-webpack-plugin');
 
-var isProduction = process.env.NODE_ENV == 'production';
+var isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
   entry: [
@@ -77,7 +76,8 @@ module.exports = {
 
   plugins: isProduction ? [
     new webpack.optimize.UglifyJsPlugin(),
-    new CompressionPlugin()
+    new CompressionPlugin(),
+    new webpack.optimize.OccurenceOrderPlugin()
   ] : [
     new webpack.HotModuleReplacementPlugin()
   ]
