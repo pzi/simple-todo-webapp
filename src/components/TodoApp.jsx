@@ -34,7 +34,7 @@ export default class TodoApp extends React.Component {
         <h1>{ this.props.title }</h1>
         { content }
         <div>
-          The time is: { date }
+          The time is: { date } (Tick: { this.state.tick })
         </div>
         <ES6Component title="Test" initialCount={ 123 } />
         <ES6StandardComponent />
