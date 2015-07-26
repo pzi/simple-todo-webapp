@@ -7,26 +7,35 @@
  */
 'use strict';
 
+var path = require('path');
 var webpack = require('webpack');
+var CompressionPlugin = require('compression-webpack-plugin');
+
+var isProduction = process.env.NODE_ENV === 'production';
+
+var entryJS = ['Application'];
+
+if(!isProduction) {
+  // to avoid adding it to html source
+  entryJS.push('webpack-dev-server/client?http://localhost:8080');
+  // only-dev-server doesn't auto-reload browser if HMR fails
+  entryJS.push('webpack/hot/only-dev-server');
+}
 
 module.exports = {
-  entry: {
-    Application: [
-      'webpack-dev-server/client?http://localhost:8080', // to avoid adding it to html source
-      'webpack/hot/only-dev-server', // only-dev-server doesn't auto-reload browser if HMR fails
-      'Application' // my app entry point
-    ]
-  },
+
+  entry: entryJS,
 
   output: {
-    path: './build',
+    path: path.join(__dirname, 'build'),
     filename: 'application.js',
     publicPath: '/assets/'
   },
 
   devServer: {
-    contentBase: './src',
-    hot: true
+    contentBase: path.join(__dirname, 'src'),
+    hot: true,
+    historyApiFallback: true
   },
 
   debug: true,
@@ -39,26 +48,52 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js', '.jsx', '.css', '.sass'],
+    extensions: [
+      '',
+      '.js',
+      '.jsx',
+      '.css',
+      '.sass',
+      '.png',
+      '.svg',
+      '.gif',
+      '.jpg',
+      '.jpeg'
+    ],
     modulesDirectories: ['src', 'node_modules']
   },
 
   module: {
     loaders: [{
         test: /\.css$/,
-        loader: 'style!css'
+        loader: 'style!css!autoprefixer'
       }, {
         test: /\.sass$/,
-        loader: 'style!css!sass?indentedSyntax'
+        loader: 'style!css!autoprefixer!sass?indentedSyntax'
       }, {
         test: /\.jsx?$/,
         exclude: /(node_modules)/,
         loader: 'react-hot!babel?optional[]=runtime&stage=0'
+      }, {
+        test: /\.coffee$/,
+        exclude: /(node_modules)/,
+        loader: 'coffee'
+      }, {
+        test: /\.cjsx$/,
+        exclude: /(node_modules)/,
+        loader: 'coffee!cjsx'
+      }, {
+        test: /\.(png|svg|gif|jpg|jpeg)$/,
+        exclude: /(node_modules)/,
+        loader: 'url?limit=1000'
       }
     ]
   },
 
-  plugins: [
+  plugins: isProduction ? [
+    new webpack.optimize.UglifyJsPlugin(),
+    new CompressionPlugin()
+  ] : [
     new webpack.HotModuleReplacementPlugin()
   ]
 };
