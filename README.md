@@ -4,7 +4,7 @@
 
 ## Wowie!
 
-Thanks to @levibuzolic for his help, tips and time.
+Thanks to [@levibuzolic](https://github.com/levibuzolic) for his help, tips and time.
 
 ## Spin up
 
