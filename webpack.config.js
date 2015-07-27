@@ -17,9 +17,9 @@ var entryJS = ['Application'];
 
 if(!isProduction) {
   // to avoid adding it to html source
-  entryJS.push('webpack-dev-server/client?http://localhost:8080');
+  entryJS.splice(0, 0, 'webpack-dev-server/client?http://localhost:8080');
   // only-dev-server doesn't auto-reload browser if HMR fails
-  entryJS.push('webpack/hot/only-dev-server');
+  entryJS.splice(1, 0, 'webpack/hot/only-dev-server');
 }
 
 module.exports = {
@@ -91,6 +91,7 @@ module.exports = {
   },
 
   plugins: isProduction ? [
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin(),
     new CompressionPlugin()
   ] : [
