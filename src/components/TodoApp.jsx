@@ -3,59 +3,54 @@ import '../styles/style';
 
 import React from 'react';
 import request from 'axios';
+import TodoItem from './todoItem';
 
-export default class TodoApp extends React.Component {
+export default React.createClass({
+  displayName: 'TodoApp',
 
-  constructor(props) {
-    super(props);
-    this.state = {
+  getInitialState: function() {
+    return {
       todos: null
     };
-  }
+  },
 
-  componentDidMount() {
+  componentDidMount: function() {
     // Fake TODOs API
     request
       .get('http://jsonplaceholder.typicode.com/todos')
       .then((response) => {
-        this.onLoadTodos(response.data)
+        this._onLoadTodos(response.data);
       })
       .catch((response) => {
-        console.log('Error:', response)
+        alert("Check console!");
+        console.log('Error:', response);
       })
-  }
+  },
 
-  onLoadTodos(todos) {
+  _onLoadTodos: function(todos) {
     this.setState({ todos: todos });
-  }
+  },
 
-  render() {
-    return (
-      <div>
-        <h1>TodoApp</h1>
-        { this.renderTodos() }
-      </div>
-    );
-  }
-
-  renderTodos() {
-    if (this.state.todos == null) return <div>Loading...</div>;
+  _renderTodos: function() {
+    if (this.state.todos === null) return <div>Loading...</div>;
 
     return this.state.todos.length > 0 ? (
       <ol>
-        { this.state.todos.map(this.renderTodo) }
+        { this.state.todos.map(function(todo) {
+          return <TodoItem key={ todo.id } todo={ todo } />;
+        })}
       </ol>
     ) : (
       <div>Sorry, no TODOs for you.</div>
     )
-  }
+  },
 
-  renderTodo(todo) {
+  render: function() {
     return (
-      <li key={ todo.id }>
-        { todo.completed ? '✅' : '❎' }
-        { todo.title }
-      </li>
+      <div>
+        <h1>TodoApp</h1>
+        { this._renderTodos() }
+      </div>
     );
   }
-}
+});
