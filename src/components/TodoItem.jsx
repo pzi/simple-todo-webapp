@@ -7,19 +7,10 @@ export default React.createClass({
     todo: React.PropTypes.object
   },
 
-  getInitialState: function() {
-    return {
-      // props in getInitialState is an anti-pattern :| what to do?
-      // So far I am only using title & completed, should only these 2 be passed down
-      // as props from TodoApp?
-      checked: this.props.todo.completed || false
-    };
-  },
-
-  _onChangeHandler: function(event) {
-    this.setState({
-      checked: !this.state.checked
-    });
+  _handleChange: function(event) {
+    event.preventDefault();
+    // use the changeHandler from the parent component
+    this.props.onChange(event.target.checked);
   },
 
   render: function() {
@@ -28,7 +19,7 @@ export default React.createClass({
     return (
       <li>
         <label>
-          <input type='checkbox' checked={ this.state.checked } onChange={ this._onChangeHandler } />
+          <input type='checkbox' checked={ todo.completed } onChange={ this._handleChange } />
           {todo.title}
         </label>
       </li>

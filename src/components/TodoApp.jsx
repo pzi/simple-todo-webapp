@@ -31,14 +31,18 @@ export default React.createClass({
     this.setState({ todos: todos });
   },
 
+  _handleChange: function(thing) {
+    console.log("stuff", thing);
+  },
+
   _renderTodos: function() {
     if (this.state.todos === null) return <div>Loading...</div>;
 
     return this.state.todos.length > 0 ? (
       <ol>
-        { this.state.todos.map(function(todo) {
-          return <TodoItem key={ todo.id } todo={ todo } />;
-        })}
+        { this.state.todos.map((todo) =>
+          <TodoItem key={ todo.id } todo={ todo } onChange={ this._handleChange } />
+        )}
       </ol>
     ) : (
       <div>Sorry, no TODOs for you.</div>
