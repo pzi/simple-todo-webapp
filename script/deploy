@@ -5,7 +5,7 @@ npm run build
 
 echo '--- Copy build assets'
 mkdir .tmp
-cp build .tmp/assets
+cp -R build .tmp/assets
 cp src/index.html .tmp/index.html
 
 echo '--- Stash build assets'
