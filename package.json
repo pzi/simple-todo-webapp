@@ -8,15 +8,7 @@
     "start": "webpack-dev-server",
     "clean": "rm -rf build",
     "build": "npm run clean && NODE_ENV=production webpack",
-    "copy-index": "cp ./src/index.html ./build/index.html",
-    "deploy": "./node_modules/.bin/gh-pages-deploy"
-  },
-  "gh-pages-deploy": {
-    "staticpath": "build",
-    "prep": [
-      "build",
-      "copy-index"
-    ]
+    "deploy": "./script/deploy"
   },
   "author": "Patrik Affentranger",
   "license": "MIT",
@@ -34,7 +26,6 @@
     "eslint": "^0.24.1",
     "eslint-plugin-react": "^3.0.0",
     "file-loader": "^0.8.4",
-    "gh-pages-deploy": "^0.3.0",
     "imports-loader": "^0.6.4",
     "node-sass": "^3.2.0",
     "react-hot-loader": "^1.2.8",
