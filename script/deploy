@@ -9,7 +9,7 @@ cp build/* assets/
 cp src/index.html index.html
 
 echo '--- Stash build assets'
-git stash --keep-index
+git stash -u
 
 echo '--- Switching to gh-pages branch'
 git checkout gh-pages
