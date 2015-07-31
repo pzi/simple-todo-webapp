@@ -5,7 +5,7 @@ npm run build
 
 echo '--- Copy build assets'
 mkdir .tmp
-cp -R build .tmp/assets
+cp -Rv build .tmp/assets
 cp src/index.html .tmp/index.html
 
 echo '--- Stash build assets'
@@ -19,12 +19,14 @@ echo '--- Restore stashed build assets'
 git stash pop
 
 echo '--- Overwrite existing build assets'
-cp .tmp/* .
-rm -rf .tmp
+cp -Rv .tmp/* .
+
+echo '--- Clean up our mess'
+rm -rfv .tmp
 
 echo '--- Commit and push'
 git add -A .
-DATE=$(date +"%Y-%m-d-%H-%M-%S")
+DATE=$(date +"%Y-%m-%d-%H-%M-%S")
 git commit -a -m "Deploy $DATE"
 git push origin gh-pages
 
