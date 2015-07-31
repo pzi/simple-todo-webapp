@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+echo '--- Webpack build'
+npm run build
+
+echo '--- Copy build assets'
+mkdir .tmp
+cp -Rv build .tmp/assets
+cp src/index.html .tmp/index.html
+
+echo '--- Stash build assets'
+git stash -u
+
+echo '--- Switching to gh-pages branch'
+git checkout gh-pages
+git reset --hard origin/gh-pages
+
+echo '--- Restore stashed build assets'
+git stash pop
+
+echo '--- Overwrite existing build assets'
+cp -Rv .tmp/* .
+
+echo '--- Clean up our mess'
+rm -rfv .tmp
+
+echo '--- Commit and push'
+git add -A .
+DATE=$(date +"%Y-%m-%d-%H-%M-%S")
+git commit -a -m "Deploy $DATE"
+git push origin gh-pages
+
+echo '--- Checking out master'
+git checkout master

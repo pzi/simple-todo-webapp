@@ -14,33 +14,30 @@ var StatsPlugin = require('stats-webpack-plugin');
 
 var isProduction = process.env.NODE_ENV === 'production';
 
-var entryJS = ['Application'];
-
-if(!isProduction) {
-  // to avoid adding it to html source
-  entryJS.splice(0, 0, 'webpack-dev-server/client?http://localhost:8080');
-  // only-dev-server doesn't auto-reload browser if HMR fails
-  entryJS.splice(1, 0, 'webpack/hot/only-dev-server');
-}
-
 module.exports = {
 
-  entry: entryJS,
+  entry: (function(){
+    var entry = isProduction ? [] : [
+      'webpack-dev-server/client?http://localhost:8080',
+      'webpack/hot/only-dev-server'
+    ];
+    return entry.push('Application');
+  })(),
 
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'application.js',
-    publicPath: '/assets/'
+    publicPath: '/simple-todo-webapp/assets/'
   },
 
   devServer: {
     contentBase: path.join(__dirname, 'src'),
-    hot: true,
+    hot: !isProduction,
     historyApiFallback: true
   },
 
   debug: true,
-  devtool: 'sourcemap',
+  devtool: isProduction ? null : 'sourcemap',
 
   stats: {
     progress: true,
