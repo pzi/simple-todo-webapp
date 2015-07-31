@@ -2,7 +2,7 @@ import 'normalize.css';
 import '../styles/style';
 
 import React from 'react';
-import request from 'axios';
+import request from 'superagent';
 import TodoItem from 'components/TodoItem';
 
 export default React.createClass({
@@ -18,13 +18,9 @@ export default React.createClass({
     // Fake TODOs API
     request
       .get('http://jsonplaceholder.typicode.com/todos')
-      .then((response) => {
-        this._onLoadTodos(response.data);
-      })
-      .catch((response) => {
-        alert("Check console!");
-        console.log('Error:', response);
-      })
+      .end(() => {
+        debugger
+      });
   },
 
   _onLoadTodos: function(todos) {
