@@ -21,7 +21,8 @@ module.exports = {
       'webpack-dev-server/client?http://localhost:8080',
       'webpack/hot/only-dev-server'
     ];
-    return entry.push('Application');
+    entry.push('Application')
+    return entry;
   })(),
 
   output: {
