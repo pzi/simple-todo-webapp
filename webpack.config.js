@@ -10,6 +10,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var CompressionPlugin = require('compression-webpack-plugin');
+var StatsPlugin = require('stats-webpack-plugin');
 
 var isProduction = process.env.NODE_ENV === 'production';
 
@@ -91,10 +92,15 @@ module.exports = {
   },
 
   plugins: isProduction ? [
+    new webpack.DefinePlugin({
+      'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV) },
+      '__DEV__': process.env.NODE_ENV !== 'production'
+    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin(),
-    new CompressionPlugin()
+    new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false }}),
+    new CompressionPlugin(),
+    new StatsPlugin('stats.json', { chunkModules: true })
   ] : [
     new webpack.HotModuleReplacementPlugin()
   ]

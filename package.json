@@ -7,7 +7,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "clean": "rm -rf build",
-    "build": "npm run clean && webpack"
+    "build": "npm run clean && NODE_ENV=production webpack"
   },
   "author": "Patrik Affentranger",
   "license": "MIT",
@@ -39,6 +39,7 @@
     "babel-runtime": "^5.8.5",
     "es5-shim": "^4.1.10",
     "normalize.css": "^3.0.3",
-    "react": "^0.13.3"
+    "react": "^0.13.3",
+    "stats-webpack-plugin": "^0.2.1"
   }
 }
