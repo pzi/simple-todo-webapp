@@ -7,7 +7,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "clean": "rm -rf build",
-    "build": "npm run clean && NODE_ENV=production webpack",
+    "build": "npm run clean && webpack",
     "deploy": "./script/deploy"
   },
   "author": "Patrik Affentranger",

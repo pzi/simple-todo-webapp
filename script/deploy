@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-echo '--- Webpack build'
-npm run build
+echo '--- Webpack production build'
+NODE_ENV=production npm run build
 
 echo '--- Copy build assets'
 mkdir .tmp
