@@ -92,6 +92,7 @@ module.exports = {
 
   plugins: isProduction ? [
     new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin(),
     new CompressionPlugin()
   ] : [
