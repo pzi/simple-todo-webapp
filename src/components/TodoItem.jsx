@@ -17,7 +17,7 @@ export default React.createClass({
   },
 
   render: function() {
-    let todo = this.props.todo;
+    const todo = this.props.todo;
 
     return (
       <li>

@@ -3,7 +3,7 @@ import '../styles/style';
 
 import React from 'react';
 import request from 'axios';
-import TodoItem from './todoItem';
+import TodoItem from 'components/TodoItem';
 
 export default React.createClass({
   displayName: 'TodoApp',
