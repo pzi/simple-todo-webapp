@@ -18,8 +18,13 @@ export default React.createClass({
     // Fake TODOs API
     request
       .get('http://jsonplaceholder.typicode.com/todos')
-      .end(() => {
-        debugger
+      .end((err, res) => {
+        if (res.ok) {
+          this._onLoadTodos(res.body);
+        } else {
+          alert('Error!');
+          throw new Error(res);
+        }
       });
   },
 
@@ -31,18 +36,19 @@ export default React.createClass({
     let todos = this.state.todos;
 
     request
-      .patch('http://jsonplaceholder.typicode.com/todos/' + updatedTodoItem.id, {
-        completed: updatedTodoItem.completed
-      })
-      .then((response) => {
-        todos = todos.map((todoItem) => {
-          return todoItem.id === response.data.id ? updatedTodoItem : todoItem;
-        });
-        this.setState({todos: todos});
-      })
-      .catch((response) => {
-        console.warn('Error:', response);
-      })
+      .patch(`http://jsonplaceholder.typicode.com/todos/${updatedTodoItem.id}`)
+      .send(updatedTodoItem)
+      .end((err, res) => {
+        if (res.ok) {
+          todos = todos.map((todoItem) => {
+            return todoItem.id === res.body.id ? updatedTodoItem : todoItem;
+          });
+          this.setState({todos: todos});
+        } else {
+          alert('Error!');
+          throw new Error(res);
+        }
+      });
   },
 
   _renderTodos: function() {
