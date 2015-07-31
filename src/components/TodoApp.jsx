@@ -31,8 +31,22 @@ export default React.createClass({
     this.setState({ todos: todos });
   },
 
-  _handleChange: function(thing) {
-    console.log("stuff", thing);
+  _handleChange: function(updatedTodoItem) {
+    let todos = this.state.todos;
+
+    request
+      .patch('http://jsonplaceholder.typicode.com/todos/' + updatedTodoItem.id, {
+        completed: updatedTodoItem.completed
+      })
+      .then((response) => {
+        todos = todos.map((todoItem) => {
+          return todoItem.id === response.data.id ? updatedTodoItem : todoItem;
+        });
+        this.setState({todos: todos});
+      })
+      .catch((response) => {
+        console.warn('Error:', response);
+      })
   },
 
   _renderTodos: function() {
