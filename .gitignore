@@ -1,0 +1,8 @@
+/node_modules/
+/build/
+/.tmp/
+.DS_Store
+npm-debug.log
+/assets/stats.json
+/assets/*.map
+/assets/*.gz
