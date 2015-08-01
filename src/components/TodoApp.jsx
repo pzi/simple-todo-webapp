@@ -1,9 +1,11 @@
 import 'normalize.css';
 import '../styles/style';
 
-import React from 'react';
+import React from 'react/addons';
 import request from 'axios';
 import TodoItem from 'components/TodoItem';
+
+const ReactCSSTransitionGroup = React.addons.CSSTransitionGroup
 
 export default React.createClass({
   displayName: 'TodoApp',
@@ -53,11 +55,11 @@ export default React.createClass({
     if (this.state.todos === null) return <div>Loading...</div>;
 
     return this.state.todos.length > 0 ? (
-      <ol>
+      <ReactCSSTransitionGroup component='ol' transitionName='todo-list' transitionAppear={true} className='todo-list'>
         { this.state.todos.map((todo) =>
           <TodoItem key={ todo.id } todo={ todo } onChange={ this._handleChange } />
         )}
-      </ol>
+      </ReactCSSTransitionGroup>
     ) : (
       <div>Sorry, no TODOs for you.</div>
     )
