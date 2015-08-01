@@ -2,8 +2,8 @@
  * Webpack development server configuration
  *
  * This file is set up for serving the webpack-dev-server, which will watch for changes and
- * recompile as required if the subfolder /webpack-dev-server/ is visited. Visiting the root will
- * not automatically reload.
+ * recompile as required using the Hot Module Reloader HMR.
+ * Note: The injected `only-dev-server` script doesn't auto-reload browser if HMR fails.
  */
 'use strict';
 
