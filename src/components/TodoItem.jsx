@@ -21,8 +21,10 @@ export default React.createClass({
 
     return (
       <li>
-        <label>
-          <input type='checkbox' checked={ todo.completed } onChange={ this._handleChange } />
+        <div className='toggle'>
+          <input type='checkbox' id={ "todoitem-" + todo.id } checked={ todo.completed } onChange={ this._handleChange } />
+        </div>
+        <label htmlFor={ "todoitem-" + todo.id } className={ todo.completed ? 'completed' : '' }>
           { todo.title }
           <span className='created-by'>Created by { this.props.userName }</span>
         </label>

@@ -67,7 +67,7 @@ export default React.createClass({
   },
 
   _renderTodos: function() {
-    if (this.state.todos === null) return <div>Loading...</div>;
+    if (this.state.todos === null) return <div className='loading'>Fetching TODOs&hellip;</div>;
 
     return this.state.todos.length > 0 ? (
       <ReactCSSTransitionGroup component='ol' transitionName='todo-list' transitionAppear={true} className='todo-list'>
@@ -81,7 +81,7 @@ export default React.createClass({
         )}
       </ReactCSSTransitionGroup>
     ) : (
-      <div>Sorry, no TODOs for you.</div>
+      <div className='todo-list-empty'>Sorry, no TODOs for you.</div>
     )
   },
 
@@ -89,6 +89,7 @@ export default React.createClass({
     return (
       <div>
         <h1>TodoApp</h1>
+        <p>Data by <a href='https://github.com/typicode/jsonplaceholder'>JSONPlaceholder</a>.</p>
         { this._renderTodos() }
       </div>
     );
