@@ -3,9 +3,24 @@ import '../styles/style';
 
 import React from 'react/addons';
 import request from 'axios';
+import _find from 'lodash/collection/find';
+import _result from 'lodash/object/result'
 import TodoItem from 'components/TodoItem';
 
 const ReactCSSTransitionGroup = React.addons.CSSTransitionGroup
+
+const USERS = [
+  {userId: 1, name: 'Patrik'},
+  {userId: 2, name: 'Stefan'},
+  {userId: 3, name: 'Sarah'},
+  {userId: 4, name: 'Levi'},
+  {userId: 5, name: 'Vinny'},
+  {userId: 6, name: 'John'},
+  {userId: 7, name: 'Jane'},
+  {userId: 8, name: 'Caroline'},
+  {userId: 9, name: 'Nina'},
+  {userId: 10, name: 'Antoinette'}
+];
 
 export default React.createClass({
   displayName: 'TodoApp',
@@ -57,7 +72,12 @@ export default React.createClass({
     return this.state.todos.length > 0 ? (
       <ReactCSSTransitionGroup component='ol' transitionName='todo-list' transitionAppear={true} className='todo-list'>
         { this.state.todos.map((todo) =>
-          <TodoItem key={ todo.id } todo={ todo } onChange={ this._handleChange } />
+          <TodoItem
+            key={ todo.id }
+            todo={ todo }
+            userName={ _result(_find(USERS, 'userId', todo.userId), 'name') }
+            onChange={ this._handleChange }
+          />
         )}
       </ReactCSSTransitionGroup>
     ) : (
