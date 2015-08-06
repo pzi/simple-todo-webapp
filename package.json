@@ -8,6 +8,7 @@
     "start": "webpack-dev-server",
     "clean": "rm -rf build",
     "build": "npm run clean && webpack",
+    "lint": "eslint . --ext .js --ext .jsx",
     "deploy": "./script/deploy"
   },
   "author": "Patrik Affentranger",

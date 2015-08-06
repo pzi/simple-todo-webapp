@@ -1,13 +1,13 @@
 import 'normalize.css';
-import '../styles/style';
+import 'styles/style';
 
 import React from 'react/addons';
 import request from 'axios';
 import _find from 'lodash/collection/find';
-import _result from 'lodash/object/result'
+import _result from 'lodash/object/result';
 import TodoItem from 'components/TodoItem';
 
-const ReactCSSTransitionGroup = React.addons.CSSTransitionGroup
+const ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 const USERS = [
   {userId: 1, name: 'Patrik'},
@@ -39,9 +39,9 @@ export default React.createClass({
         this._onLoadTodos(response.data);
       })
       .catch((response) => {
-        alert("Check console!");
+        alert('Check console!');
         console.log('Error:', response);
-      })
+      });
   },
 
   _onLoadTodos: function(todos) {
@@ -63,7 +63,7 @@ export default React.createClass({
       })
       .catch((response) => {
         console.warn('Error:', response);
-      })
+      });
   },
 
   _renderTodos: function() {
@@ -82,7 +82,7 @@ export default React.createClass({
       </ReactCSSTransitionGroup>
     ) : (
       <div className='todo-list-empty'>Sorry, no TODOs for you.</div>
-    )
+    );
   },
 
   render: function() {
