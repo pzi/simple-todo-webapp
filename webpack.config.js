@@ -59,7 +59,7 @@ module.exports = {
       '.jpg',
       '.jpeg'
     ],
-    modulesDirectories: ['src', 'node_modules']
+    root: [ path.join(__dirname, 'src') ]
   },
 
   module: {
