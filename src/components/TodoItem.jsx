@@ -1,5 +1,18 @@
 import React from 'react';
 
+const USERS = [
+  {userId: 1, name: 'Patrik'},
+  {userId: 2, name: 'Stefan'},
+  {userId: 3, name: 'Sarah'},
+  {userId: 4, name: 'Levi'},
+  {userId: 5, name: 'Vinny'},
+  {userId: 6, name: 'John'},
+  {userId: 7, name: 'Jane'},
+  {userId: 8, name: 'Caroline'},
+  {userId: 9, name: 'Nina'},
+  {userId: 10, name: 'Antoinette'}
+];
+
 export default React.createClass({
   displayName: 'TodoItem',
 
@@ -16,6 +29,10 @@ export default React.createClass({
     });
   },
 
+  _resolveUserName: function(todo) {
+    return USERS.filter((user) => user.userId === todo.userId)[0].name;
+  },
+
   render: function() {
     const todo = this.props.todo;
 
@@ -26,7 +43,7 @@ export default React.createClass({
         </div>
         <label htmlFor={ 'todoitem-' + todo.id } className={ todo.completed ? 'completed' : '' }>
           { todo.title }
-          <span className='created-by'>Created by { this.props.userName }</span>
+          <span className='created-by'>Created by { this._resolveUserName(todo) }</span>
         </label>
       </li>
     );

@@ -3,26 +3,10 @@ import 'styles/style';
 
 import React from 'react/addons';
 import request from 'axios';
-import _find from 'lodash/collection/find';
-import _result from 'lodash/object/result';
-import _reduce from 'lodash/collection/reduce';
 import TodoItem from 'components/TodoItem';
 import TodoCount from 'components/TodoCount';
 
 const ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
-
-const USERS = [
-  {userId: 1, name: 'Patrik'},
-  {userId: 2, name: 'Stefan'},
-  {userId: 3, name: 'Sarah'},
-  {userId: 4, name: 'Levi'},
-  {userId: 5, name: 'Vinny'},
-  {userId: 6, name: 'John'},
-  {userId: 7, name: 'Jane'},
-  {userId: 8, name: 'Caroline'},
-  {userId: 9, name: 'Nina'},
-  {userId: 10, name: 'Antoinette'}
-];
 
 export default React.createClass({
   displayName: 'TodoApp',
@@ -68,14 +52,15 @@ export default React.createClass({
       });
   },
 
-  _completedCount: function(todos) {
-    return _reduce(todos, function(total, todo) {
-      return todo.completed ? total + 1 : total;
-    }, 0);
+  _completedCount: function() {
+    return this.state.todos.filter((todo) => todo.completed).length;
   },
 
   _renderTodoCount: function () {
-    return (<TodoCount count={ this.state.todos.length } completedCount={ this._completedCount(this.state.todos) } />);
+    return <TodoCount
+      count={ this.state.todos.length }
+      completedCount={ this._completedCount(this.state.todos) }
+    />;
   },
 
   _renderTodos: function() {
@@ -90,7 +75,6 @@ export default React.createClass({
               <TodoItem
                 key={ todo.id }
                 todo={ todo }
-                userName={ _result(_find(USERS, 'userId', todo.userId), 'name') }
                 onChange={ this._handleChange }
               />
             )}
@@ -99,7 +83,7 @@ export default React.createClass({
         </div>
       );
     } else {
-      return (<div className='todo-list-empty'>Sorry, no TODOs for you.</div>);
+      return <div className='todo-list-empty'>Sorry, no TODOs for you.</div>;
     }
   },
 
