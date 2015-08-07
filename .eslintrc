@@ -14,16 +14,17 @@
     "node": true
   },
   "rules": {
-    "eol-last": 2,
     "camelcase": 2,
+    "eol-last": 2,
+    "indent": [1, 2],
     "linebreak-style": [2, "unix"],
     "no-underscore-dangle": 0,
-    "semi": [2, "always"],
-    "indent": [1, 2],
+    "no-var": 2,
+    "prefer-const": 1,
     "quotes": [2, "single"],
     "react/jsx-boolean-value": 2,
-    "react/jsx-quotes": 1,
     "react/jsx-no-undef": 1,
+    "react/jsx-quotes": 1,
     "react/jsx-uses-react": 1,
     "react/jsx-uses-vars": 1,
     "react/no-did-mount-set-state": 1,
@@ -31,7 +32,8 @@
     "react/no-multi-comp": 1,
     "react/no-unknown-property": 1,
     "react/react-in-jsx-scope": 1,
-    "react/self-closing-comp": 1
+    "react/self-closing-comp": 1,
+    "semi": [2, "always"]
   },
   "plugins": [
     "react"
