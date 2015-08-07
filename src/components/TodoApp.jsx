@@ -5,7 +5,9 @@ import React from 'react/addons';
 import request from 'axios';
 import _find from 'lodash/collection/find';
 import _result from 'lodash/object/result';
+import _reduce from 'lodash/collection/reduce';
 import TodoItem from 'components/TodoItem';
+import TodoCount from 'components/TodoCount';
 
 const ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
@@ -66,23 +68,39 @@ export default React.createClass({
       });
   },
 
+  _completedCount: function(todos) {
+    return _reduce(todos, function(total, todo) {
+      return todo.completed ? total + 1 : total;
+    }, 0);
+  },
+
+  _renderTodoCount: function () {
+    return (<TodoCount count={ this.state.todos.length } completedCount={ this._completedCount(this.state.todos) } />);
+  },
+
   _renderTodos: function() {
     if (this.state.todos === null) return <div className='loading'>Fetching TODOs&hellip;</div>;
 
-    return this.state.todos.length > 0 ? (
-      <ReactCSSTransitionGroup component='ol' transitionName='todo-list' transitionAppear={true} className='todo-list'>
-        { this.state.todos.map((todo) =>
-          <TodoItem
-            key={ todo.id }
-            todo={ todo }
-            userName={ _result(_find(USERS, 'userId', todo.userId), 'name') }
-            onChange={ this._handleChange }
-          />
-        )}
-      </ReactCSSTransitionGroup>
-    ) : (
-      <div className='todo-list-empty'>Sorry, no TODOs for you.</div>
-    );
+    if (this.state.todos.length > 0) {
+      return (
+        <div>
+          { this._renderTodoCount() }
+          <ReactCSSTransitionGroup component='ol' transitionName='todo-list' transitionAppear={ true } className='todo-list'>
+            { this.state.todos.map((todo) =>
+              <TodoItem
+                key={ todo.id }
+                todo={ todo }
+                userName={ _result(_find(USERS, 'userId', todo.userId), 'name') }
+                onChange={ this._handleChange }
+              />
+            )}
+          </ReactCSSTransitionGroup>,
+          { this._renderTodoCount() }
+        </div>
+      );
+    } else {
+      return (<div className='todo-list-empty'>Sorry, no TODOs for you.</div>);
+    }
   },
 
   render: function() {
