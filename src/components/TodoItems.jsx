@@ -1,5 +1,4 @@
 import request from 'axios';
-import _ from 'lodash';
 import React from 'react';
 import TodoItem from 'components/TodoItem';
 
@@ -15,8 +14,8 @@ export default React.createClass({
         completed: updatedTodoItem.completed
       })
       .then((response) => {
-        const index = _.findIndex(todos, 'id', updatedTodoItem.id);
-        todos[index] =  updatedTodoItem;
+        const index = todos.findIndex((todo, index, todos) => todo.id === updatedTodoItem.id);
+        todos[index] = updatedTodoItem;
         this.setState({todos: todos});
       })
       .catch((response) => {
