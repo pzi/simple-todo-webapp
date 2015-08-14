@@ -28,19 +28,29 @@ export default React.createClass({
       });
   },
 
+  _handleChange: function(updatedTodoItem) {
+    const todos = this.state.todos;
+
+    request
+      .patch(`http://jsonplaceholder.typicode.com/todos/${updatedTodoItem.id}`, {
+        completed: updatedTodoItem.completed
+      })
+      .then((response) => {
+        const index = todos.findIndex((todo, index, todos) => todo.id === updatedTodoItem.id);
+        todos[index] = updatedTodoItem;
+        this.setState({todos: todos});
+      })
+      .catch((response) => {
+        console.warn('Error: ', response);
+      });
+  },
+
   _onLoadTodos: function(todos) {
     this.setState({ todos: todos });
   },
 
-  _completedCount: function() {
-    return this.state.todos.filter((todo) => todo.completed).length;
-  },
-
   _renderTodoCount: function () {
-    return <TodoCount
-      count={ this.state.todos.length }
-      completedCount={ this._completedCount(this.state.todos) }
-    />;
+    return <TodoCount todos={ this.state.todos } />;
   },
 
   _renderTodos: function() {
@@ -49,7 +59,7 @@ export default React.createClass({
     return (
       <div>
         { this._renderTodoCount() }
-        <TodoItems todos={ this.state.todos } />
+        <TodoItems todos={ this.state.todos } onChange={ this._handleChange } />
         { this._renderTodoCount() }
       </div>
     );

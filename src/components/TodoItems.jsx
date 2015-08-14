@@ -6,23 +6,6 @@ const ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 export default React.createClass({
 
-  _handleChange: function(updatedTodoItem) {
-    const todos = this.props.todos;
-
-    request
-      .patch(`http://jsonplaceholder.typicode.com/todos/${updatedTodoItem.id}`, {
-        completed: updatedTodoItem.completed
-      })
-      .then((response) => {
-        const index = todos.findIndex((todo, index, todos) => todo.id === updatedTodoItem.id);
-        todos[index] = updatedTodoItem;
-        this.setState({todos: todos});
-      })
-      .catch((response) => {
-        console.warn('Error: ', response);
-      });
-  },
-
   render: function() {
     if (this.props.todos.length > 0) {
       return (
@@ -31,7 +14,7 @@ export default React.createClass({
             <TodoItem
               key={ todo.id }
               todo={ todo }
-              onChange={ this._handleChange }
+              onChange={ this.props.onChange }
             />
           )}
         </ReactCSSTransitionGroup>
