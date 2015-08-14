@@ -1,14 +1,7 @@
 import React from 'react';
 
-export default React.createClass({
-  displayName: 'TodoCount',
-
-  propTypes: {
-    count: React.PropTypes.number,
-    completedCount: React.PropTypes.number
-  },
-
-  render: function () {
+class TodoCount extends React.Component {
+  render() {
     return (
       <dl>
         <dt>Number of Todos:</dt>
@@ -18,4 +11,11 @@ export default React.createClass({
       </dl>
     );
   }
-});
+}
+
+TodoCount.propTypes = {
+  count: React.PropTypes.number,
+  completedCount: React.PropTypes.number
+};
+
+export default TodoCount;
