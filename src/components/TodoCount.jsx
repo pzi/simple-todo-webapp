@@ -16,4 +16,6 @@ export default class TodoCount extends React.Component {
 TodoCount.propTypes = {
   count: React.PropTypes.number,
   completedCount: React.PropTypes.number
-}
+};
+
+export default TodoCount;
