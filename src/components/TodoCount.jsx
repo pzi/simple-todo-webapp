@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class TodoCount extends React.Component {
+class TodoCount extends React.Component {
   render() {
     return (
       <dl>
