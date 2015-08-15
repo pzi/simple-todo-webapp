@@ -28,6 +28,10 @@ export default React.createClass({
       });
   },
 
+  _onLoadTodos: function(todos) {
+    this.setState({ todos: todos });
+  },
+
   _handleChange: function(updatedTodoItem) {
     const todos = this.state.todos;
 
@@ -38,18 +42,14 @@ export default React.createClass({
       .then((response) => {
         const index = todos.findIndex((todo, index, todos) => todo.id === updatedTodoItem.id);
         todos[index] = updatedTodoItem;
-        this.setState({todos: todos});
+        this.setState({ todos: todos });
       })
       .catch((response) => {
         console.warn('Error: ', response);
       });
   },
 
-  _onLoadTodos: function(todos) {
-    this.setState({ todos: todos });
-  },
-
-  _renderTodoCount: function () {
+  _renderTodoCount: function() {
     return <TodoCount todos={ this.state.todos } />;
   },
 
