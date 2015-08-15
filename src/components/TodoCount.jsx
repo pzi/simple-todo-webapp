@@ -15,7 +15,7 @@ export default React.createClass({
     };
   },
 
-  render: function () {
+  render: function() {
     const todos = this.props.todos;
 
     return (

@@ -33,6 +33,7 @@
     "react/no-unknown-property": 1,
     "react/react-in-jsx-scope": 1,
     "react/self-closing-comp": 1,
+    "space-before-function-paren": [2, "never"],
     "semi": [2, "always"]
   },
   "plugins": [
