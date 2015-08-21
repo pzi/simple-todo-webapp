@@ -6,6 +6,7 @@ import request from 'axios';
 import TodoItems from 'components/TodoItems';
 import TodoCount from 'components/TodoCount';
 
+const JSON_PLACEHOLDER_URL = 'http://jsonplaceholder.typicode.com';
 export default React.createClass({
   displayName: 'TodoApp',
 
@@ -18,7 +19,11 @@ export default React.createClass({
   componentDidMount: function() {
     // Fake TODOs API
     request
-      .get('http://jsonplaceholder.typicode.com/todos')
+      .get(`${JSON_PLACEHOLDER_URL}/todos`, {
+        params: {
+          userId: 1
+        }
+      })
       .then((response) => {
         this._onLoadTodos(response.data);
       })
@@ -36,7 +41,7 @@ export default React.createClass({
     const todos = this.state.todos;
 
     request
-      .patch(`http://jsonplaceholder.typicode.com/todos/${updatedTodoItem.id}`, {
+      .patch(`${JSON_PLACEHOLDER_URL}/todos/${updatedTodoItem.id}`, {
         completed: updatedTodoItem.completed
       })
       .then((response) => {
@@ -45,6 +50,7 @@ export default React.createClass({
         this.setState({ todos: todos });
       })
       .catch((response) => {
+        alert('Check console!');
         console.warn('Error: ', response);
       });
   },
