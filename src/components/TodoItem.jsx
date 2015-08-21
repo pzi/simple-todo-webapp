@@ -32,10 +32,20 @@ export default React.createClass({
     onChange: React.PropTypes.func
   },
 
+  componentWillReceiveProps: function(nextProps) {
+    if (nextProps.todo.completed !== this.props.todo.completed) {
+      this.setState({
+        pending: false
+      });
+    }
+  },
+
   _handleChange: function(event) {
+    event.preventDefault();
+    if (this.state.pending) { return; }
+
     this.setState({ pending: true });
 
-    event.preventDefault();
     // use the changeHandler from the parent component
     this.props.onChange({
       ...this.props.todo,
@@ -45,14 +55,6 @@ export default React.createClass({
 
   _resolveUserName: function(todo) {
     return USERS.filter((user) => user.userId === todo.userId)[0].name;
-  },
-
-  componentWillReceiveProps: function(nextProps) {
-    if (nextProps.todo.completed !== this.props.todo.completed) {
-      this.setState({
-        pending: false
-      });
-    }
   },
 
   render: function() {
