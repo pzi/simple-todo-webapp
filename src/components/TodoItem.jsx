@@ -42,14 +42,16 @@ export default React.createClass({
     return USERS.filter((user) => user.userId === todo.userId)[0].name;
   },
 
-  shouldComponentUpdate: function(nextProps, nextState) {
-    return nextProps.todo.completed !== this.props.todo.completed || nextState.pending !== this.state.pending;
+  componentWillReceiveProps: function(nextProps) {
+    if (nextProps.todo.completed !== this.props.todo.completed) {
+      this.setState({
+        pending: false
+      });
+    }
   },
 
-  componentWillReceiveProps: function(nextProps) {
-    this.setState({
-      pending: false
-    });
+  shouldComponentUpdate: function(nextProps, nextState) {
+    return nextProps.todo.completed !== this.props.todo.completed || nextState.pending !== this.state.pending;
   },
 
   render: function() {
