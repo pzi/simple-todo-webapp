@@ -1,4 +1,7 @@
 import React from 'react';
+import { addons } from 'react/addons';
+
+const { PureRenderMixin } = addons;
 
 const USERS = [
   {userId: 1, name: 'Patrik'},
@@ -15,6 +18,8 @@ const USERS = [
 
 export default React.createClass({
   displayName: 'TodoItem',
+
+  mixins: [PureRenderMixin],
 
   getInitialState: function() {
     return {
@@ -50,13 +55,9 @@ export default React.createClass({
     }
   },
 
-  shouldComponentUpdate: function(nextProps, nextState) {
-    return nextProps.todo.completed !== this.props.todo.completed || nextState.pending !== this.state.pending;
-  },
-
   render: function() {
     const todo = this.props.todo;
-    console.log(`rendered ${todo.id}`);
+
     return (
       <li>
         <div className='toggle'>
