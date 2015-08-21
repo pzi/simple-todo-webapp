@@ -6,6 +6,11 @@ const ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 export default React.createClass({
 
+  propTypes: {
+    todo: React.PropTypes.object,
+    onChange: React.PropTypes.func
+  },
+
   render: function() {
     if (this.props.todos.length > 0) {
       return (

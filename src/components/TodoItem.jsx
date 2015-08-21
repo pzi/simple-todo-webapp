@@ -16,11 +16,20 @@ const USERS = [
 export default React.createClass({
   displayName: 'TodoItem',
 
+  getInitialState: function() {
+    return {
+      pending: false
+    };
+  },
+
   propTypes: {
-    todo: React.PropTypes.object
+    todo: React.PropTypes.object,
+    onChange: React.PropTypes.func
   },
 
   _handleChange: function(event) {
+    this.setState({ pending: true });
+
     event.preventDefault();
     // use the changeHandler from the parent component
     this.props.onChange({
@@ -33,13 +42,27 @@ export default React.createClass({
     return USERS.filter((user) => user.userId === todo.userId)[0].name;
   },
 
+  shouldComponentUpdate: function(nextProps, nextState) {
+    return nextProps.todo.completed !== this.props.todo.completed || nextState.pending !== this.state.pending;
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({
+      pending: false
+    });
+  },
+
   render: function() {
     const todo = this.props.todo;
-
+    console.log(`rendered ${todo.id}`);
     return (
       <li>
         <div className='toggle'>
-          <input type='checkbox' id={ 'todoitem-' + todo.id } checked={ todo.completed } onChange={ this._handleChange } />
+          <input type='checkbox'
+            id={ 'todoitem-' + todo.id }
+            checked={ todo.completed }
+            onChange={ this._handleChange }
+            disabled={ this.state.pending } />
         </div>
         <label htmlFor={ 'todoitem-' + todo.id } className={ todo.completed ? 'completed' : '' }>
           { todo.title }
