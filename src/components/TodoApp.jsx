@@ -69,8 +69,8 @@ export default React.createClass({
     return (
       <div>
         <h1>TodoApp</h1>
-        <p>Data by <a href='https://github.com/typicode/jsonplaceholder'>JSONPlaceholder</a>.</p>
         { this._renderTodos() }
+        <p>Data by <a href='https://github.com/typicode/jsonplaceholder'>JSONPlaceholder</a>.</p>
       </div>
     );
   }
